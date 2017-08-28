@@ -38,7 +38,7 @@ setup(
     # technical info
     version  = eav.__version__,
     packages = ['eav'],
-    requires = ['python (>= 2.5)', 'django (>= 1.1)',
+    requires = ['python (>= 2.5)', 'django (>= 1.8)',
                 'django_autoslug (>= 1.3.9)',
                 'django_view_shortcuts (>= 1.3.5)'],
     provides = ['eav'],
