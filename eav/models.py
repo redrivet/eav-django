@@ -24,7 +24,12 @@ Models
 
 # django
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
+try:
+    from django.contrib.contenttypes.fields import GenericForeignKey
+except ImportError:
+    # Django < 1.9 compatibility
+    from django.contrib.contenttypes.generic import GenericForeignKey
+
 from django.db.models import (BooleanField, CharField, DateField, FloatField,
                               ForeignKey, IntegerField, Model, NullBooleanField,
                               TextField)
@@ -323,7 +328,7 @@ class BaseAttribute(Model):
     """
     entity_type = ForeignKey(ContentType)
     entity_id = IntegerField()
-    entity = generic.GenericForeignKey(ct_field="entity_type", fk_field='entity_id')
+    entity = GenericForeignKey(ct_field="entity_type", fk_field='entity_id')
 
     value_text = TextField(blank=True, null=True)
     value_float = FloatField(blank=True, null=True)
